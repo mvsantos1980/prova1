@@ -11,9 +11,19 @@
     </div>
   <% end %>
 
+  <div>
+    <%= form.label :restaurant_id %>
+    <%= form.select :restaurant_id, Restaurant.all.order(:name).collect {|restaurant| [restaurant.name, restaurant.id]}, {}, {:class => 'form-control'} %>
+  </div>
+
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :dish_name %>
+  </div>
+
+  <div>
+    <%= form.label :category_id %>
+    <%= form.select :category_id, Category.all.order(:description).collect {|category| [category.description, category.id]}, {}, {:class => 'form-control'} %>
   </div>
 
   <div class="field">
@@ -26,7 +36,15 @@
     <%= form.time_select :timePreparation, id: :dish_timePreparation %>
   </div>
 
+  <div>
+    <%= form.label "Ingredientes" %>
+    <% Ingredient.all.order(:description).each do |ingredient| %>
+      <%= check_box_tag "dish[ingredient_ids][]", ingredient.id, @dish.ingredients.include?(ingredient) %>
+      <%= ingredient.description %>
+    <% end %>
+  </div>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Salvar" %>
   </div>
 <% end %>

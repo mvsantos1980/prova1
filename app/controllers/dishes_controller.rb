@@ -5,6 +5,7 @@ class DishesController < ApplicationController
   # GET /dishes.json
   def index
     @dishes = Dish.all
+    @ingredients = Ingredient.all.order(:description)
   end
 
   # GET /dishes/1
@@ -15,10 +16,12 @@ class DishesController < ApplicationController
   # GET /dishes/new
   def new
     @dish = Dish.new
+    @ingredients = Ingredient.all.order(:description)
   end
 
   # GET /dishes/1/edit
   def edit
+    @ingredients = Ingredient.all.order(:description)
   end
 
   # POST /dishes
@@ -69,6 +72,6 @@ class DishesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dish_params
-      params.require(:dish).permit(:name, :price, :timePreparation)
+      params.require(:dish).permit(:name, :price, :timePreparation, :category_id, :restaurant_id, :ingredient_ids=>[])
     end
 end
