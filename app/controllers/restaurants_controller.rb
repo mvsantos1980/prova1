@@ -5,20 +5,24 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all.order(:name)
+    @nav = true
   end
 
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+    @nav = true
   end
 
   # GET /restaurants/new
   def new
     @restaurant = Restaurant.new
+    @nav = true
   end
 
   # GET /restaurants/1/edit
   def edit
+    @nav = true
   end
 
   def home
@@ -28,11 +32,13 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.where("UPPER(name) LIKE ?", "%#{params[:search_term].to_s.upcase}%") unless params[:search_term].blank?
     @restaurantsJoin = Restaurant.joins("INNER JOIN dishes ON dishes.restaurant_id = restaurants.id") unless params[:search_term_dish].blank?
     @restaurants = @restaurantsJoin.where("UPPER(dishes.name) LIKE ?", "%#{params[:search_term_dish].to_s.upcase}%") unless params[:search_term_dish].blank?
+    @nav = false
   end
 
   def restaurant
     @selected_restaurant = Restaurant.new unless params[:restaurant_id].present?
     @selected_restaurant = Restaurant.find params[:restaurant_id] unless params[:restaurant_id].blank?
+    @nav = false
   end
 
   # POST /restaurants

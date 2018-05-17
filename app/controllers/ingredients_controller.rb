@@ -5,20 +5,24 @@ class IngredientsController < ApplicationController
   # GET /ingredients.json
   def index
     @ingredients = Ingredient.all
+    @nav = true
   end
 
   # GET /ingredients/1
   # GET /ingredients/1.json
   def show
+    @nav = true
   end
 
   # GET /ingredients/new
   def new
     @ingredient = Ingredient.new
+    @nav = true
   end
 
   # GET /ingredients/1/edit
   def edit
+    @nav = true
   end
 
   # POST /ingredients

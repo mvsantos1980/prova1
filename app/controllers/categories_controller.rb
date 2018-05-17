@@ -5,20 +5,24 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all.order(:description)
+    @nav = true
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @nav = true
   end
 
   # GET /categories/new
   def new
     @category = Category.new
+    @nav = true
   end
 
   # GET /categories/1/edit
   def edit
+    @nav = true
   end
 
   # POST /categories

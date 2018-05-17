@@ -1,6 +1,14 @@
-<h1>Editing Ingredient</h1>
+<div class="row">
+  <div class="col-4">
 
-<%= render 'form', ingredient: @ingredient %>
+  </div>
+  <div class="col-4">
+    <h1 class="text-center text-info font-weight-bold">Editando Ingrediente</h1>
 
-<%= link_to 'Show', @ingredient %> |
-<%= link_to 'Back', ingredients_path %>
+    <%= render 'form', ingredient: @ingredient %>
+
+    <%= link_to 'Exibir', @ingredient, :class => 'btn btn-outline-info' %> |
+    <%= link_to 'Voltar', ingredients_path, :class => 'btn btn-outline-warning' %>
+
+  </div>
+</div>

@@ -6,22 +6,26 @@ class DishesController < ApplicationController
   def index
     @dishes = Dish.all.order(:name)
     @ingredients = Ingredient.all.order(:description)
+    @nav = true
   end
 
   # GET /dishes/1
   # GET /dishes/1.json
   def show
+    @nav = true
   end
 
   # GET /dishes/new
   def new
     @dish = Dish.new
     @ingredients = Ingredient.all.order(:description)
+    @nav = true
   end
 
   # GET /dishes/1/edit
   def edit
     @ingredients = Ingredient.all.order(:description)
+    @nav = true
   end
 
   # POST /dishes
