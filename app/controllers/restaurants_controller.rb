@@ -21,6 +21,19 @@ class RestaurantsController < ApplicationController
   def edit
   end
 
+  def home
+    @restaurants = Restaurant.all.order(:name)
+    @restaurantsJoin = Restaurant.joins("INNER JOIN dishes ON dishes.restaurant_id = restaurants.id") unless params[:category_id].blank?
+    @restaurants = @restaurantsJoin.where("category_id = :cat", {cat: params[:category_id]}) unless params[:category_id].blank?
+    # @restaurants = @restaurants.where(dish params[:category_id]) unless params[:category_id].blank?
+  end
+
+  def restaurant
+    # @selected_restaurant = Restaurant.all.where(id: params[:restaurant_id]) unless params[:restaurant_id].blank?
+    @selected_restaurant = Restaurant.find params[:restaurant_id] unless params[:restaurant_id].blank?
+    # @selected_restaurant = Restaurant.joins ("INNER JOIN dishes ON dishes.restaurant_id = restaurants.id")
+  end
+
   # POST /restaurants
   # POST /restaurants.json
   def create

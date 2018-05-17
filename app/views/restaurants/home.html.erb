@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<div class="popover-header" style="margin-bottom: 20px">
+  <h1 class="text-center text-primary font-weight-bold">Find Food</h1>
+</div>
+
+
+<div class="row">
+<!--  conteúdo do site-->
+  <div class="col-9">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Restaurante</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+      </tr>
+      </thead>
+    <tbody>
+    <% @restaurants.each do |restaurant| %>
+      <tr>
+        <td><%= link_to restaurant.name, restaurant_restaurants_path( restaurant_id: restaurant.id) %></td>
+        <td><%= restaurant.address %></td>
+        <td><%= restaurant.phone %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </div>
+<!--  Barra lateral-->
+  <div class="col-3">
+    <p>Categorias:</p>
+    <ul class="list-group lis">
+      <% Category.all.order(:description).each do |cat| %>
+        <li class="list-group-item btn-light"> <%= link_to cat.description, home_restaurants_path( category_id: cat.id) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+

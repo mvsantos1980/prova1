@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<div class="popover-header" style="margin-bottom: 20px">
+  <h1 class="text-center text-primary font-weight-bold">Find Food</h1>
+</div>
+
+
+<div class="row">
+<!--  conteúdo do site-->
+  <div class="col-9">
+    <div class="card-header bg-secondary" style="border-radius: 20px 0; margin-bottom: 10px">
+      <h1 class="text-center text-white-50"><%= @selected_restaurant.name %> </h1>
+    </div>
+    <div class="row">
+      <% @selected_restaurant.dishes.order(:name).each do |dish| %>
+        <div class="col-4">
+          <div class="card shadow" style="border-radius: 20px 0">
+            <div class="card-header">
+              <p class="font-weight-bold text-center">:: <%= dish.name %> ::</p>
+            </div>
+            <div class="card-body">
+              <p>Valor: <span class="font-weight-bold">R<%= number_to_currency dish.price %></span></p>
+              <p>Tempo de preparo: <%= dish.timePreparation %></p>
+              <p>Categoria: <span class="font-weight-bold"><%= dish.category.description %></span></p>
+              <div>
+                <small class="font-weight-bold">Ingredientes:</small>
+                <p>
+                  <% dish.ingredients.order(:description).each do |ing| %>
+                  <small><%= ing.description %>, </small>
+                  <% end %>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+<!--  Barra lateral-->
+  <div class="col-3">barra</div>
+</div>
+
+
+
