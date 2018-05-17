@@ -1,6 +1,15 @@
-<h1>Editing Category</h1>
+<div class="row">
+  <div class="col-4">
 
-<%= render 'form', category: @category %>
+  </div>
+  <div class="col-4">
+    <h1 class="text-center text-info font-weight-bold">Editando categoria</h1>
 
-<%= link_to 'Show', @category %> |
-<%= link_to 'Back', categories_path %>
+    <%= render 'form', category: @category %>
+
+    <%= link_to 'Exibir', @category, :class => 'btn btn-outline-info' %> |
+    <%= link_to 'Voltar', categories_path, :class => 'btn btn-outline-warning' %>
+  </div>
+</div>
+
+

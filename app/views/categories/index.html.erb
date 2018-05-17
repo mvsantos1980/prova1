@@ -1,27 +1,34 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-4">
 
-<h1>Categories</h1>
+  </div>
+  <div class="col-4">
+    <h1 class="text-info text-center font-weight-bold">Categorias</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
+    <table class="table table-hover">
+      <thead>
       <tr>
-        <td><%= category.description %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Descrição</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= category.description %></td>
+          <td><%= link_to 'Exibir', category, :class => 'btn btn-outline-info'  %></td>
+          <td><%= link_to 'Editar', edit_category_path(category), :class => 'btn btn-outline-warning text-black-50'  %></td>
+          <td><%= link_to 'Excluir', category, method: :delete, :class => 'btn btn-outline-danger' , data: {confirm: 'Deseja me excluir?'} %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'Nova Categoria', new_category_path, :class => 'btn btn-outline-success' %>
+  </div>
+</div>
+
 
 <br>
 
-<%= link_to 'New Category', new_category_path %>
