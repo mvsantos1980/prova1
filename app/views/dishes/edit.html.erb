@@ -1,6 +1,19 @@
-<h1>Editing Dish</h1>
+<div class="row">
+  <div class="col-3">
 
-<%= render 'form', dish: @dish %>
+  </div>
+  <div class="col-6">
+    <h1 class="text-info text-center font-weight-bold">
+      Editando Prato
+      <span class="font-weight-bold text-black-50">
+        <%= @dish.name %>
+      </span>
+    </h1>
+    <nav class="nav navbar">
+      <%= link_to 'Voltar', dishes_path %>
+      <%= link_to 'Exibir', @dish %>
+    </nav>
+    <%= render 'form', dish: @dish %>
+  </div>
+</div>
 
-<%= link_to 'Show', @dish %> |
-<%= link_to 'Back', dishes_path %>

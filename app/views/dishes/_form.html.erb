@@ -11,32 +11,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :restaurant_id %>
-    <%= form.select :restaurant_id, Restaurant.all.order(:name).collect {|restaurant| [restaurant.name, restaurant.id]}, {}, {:class => 'form-control'} %>
+  <div class="form-group">
+    <%= form.label "Restaurante" %>
+    <%= form.select :restaurant_id, Restaurant.all.order(:name).collect {|restaurant| [restaurant.name, restaurant.id]}, {}, {:class => 'form-control select'} %>
   </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :dish_name %>
+  <div class="form-group">
+    <%= form.label "Nome" %>
+    <%= form.text_field :name, id: :dish_name, :class => 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :category_id %>
-    <%= form.select :category_id, Category.all.order(:description).collect {|category| [category.description, category.id]}, {}, {:class => 'form-control'} %>
+  <div class="form-group">
+    <%= form.label "Categoria" %>
+    <%= form.select :category_id, Category.all.order(:description).collect {|category| [category.description, category.id]}, {}, {:class => 'form-control select'} %>
   </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, id: :dish_price %>
+  <div class="form-group">
+    <%= form.label "Preço" %>
+    <%= form.number_field :price, id: :dish_price, :class => 'form-control', :type => 'text' %>
   </div>
 
-  <div class="field">
-    <%= form.label :timePreparation %>
-    <%= form.time_select :timePreparation, id: :dish_timePreparation %>
+  <div class="form-group">
+    <%= form.label "Tempo de preparo" %>
+    <%= form.time_select :timePreparation, id: :dish_timePreparation, :class => 'form-control' %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label "Ingredientes" %>
     <% Ingredient.all.order(:description).each do |ingredient| %>
       <%= check_box_tag "dish[ingredient_ids][]", ingredient.id, @dish.ingredients.include?(ingredient) %>
@@ -45,6 +45,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Salvar" %>
+    <%= form.submit "Salvar", :class=>'btn btn-success' %>
   </div>
 <% end %>

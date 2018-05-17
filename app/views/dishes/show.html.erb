@@ -1,19 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @dish.name %>
-</p>
+<div class="row">
+  <div class="col-4">
 
-<p>
-  <strong>Price:</strong>
-  <%= @dish.price %>
-</p>
+  </div>
+  <div class="col-4">
+    <h1 class="text-info text-center font-weight-bold">
+      <%= @dish.name %>
+    </h1>
+    <nav class="nav navbar">
+      <%= link_to 'Editar', edit_dish_path(@dish) %> |
+      <%= link_to 'Voltar', dishes_path %>
+    </nav>
+    <p>
+      <strong>Preço:</strong>
+      R<%= number_to_currency @dish.price %>
+    </p>
 
-<p>
-  <strong>Timepreparation:</strong>
-  <%= @dish.timePreparation %>
-</p>
+    <p>
+      <strong>Tempo de preparo:</strong>
+      <%= formatar_hora @dish.timePreparation %>
+    </p>
 
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+    <p>
+      <strong>Restaurante:</strong>
+      <%= @dish.restaurant.name %>
+    </p>
+
+    <p>
+      <strong>Categoria:</strong>
+      <%= @dish.category.description %>
+    </p>
+
+    <p>
+      <strong>Ingredientes:</strong>|
+      <% @dish.ingredients.order(:description).each do |ing| %>
+        <span><%= ing.description %> |</span>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+
+
+
