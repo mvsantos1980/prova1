@@ -1,19 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
+<div class="row">
+  <div class="col-4">
+    <h2 class="text-info font-weight-bold"><%= @restaurant.name %></h2>
+    <p>
+      <strong>Telefone:</strong>
+      <%= format_phone @restaurant.phone %>
+    </p>
+    <p>
+      <strong>Endereço:</strong>
+      <%= @restaurant.address %>
+    </p>
+    <%= link_to 'Editar', edit_restaurant_path(@restaurant) %> |
+    <%= link_to 'Voltar', restaurants_path %>
+  </div>
+  <div class="col-4">
+    <h3 class="text-info text-center">Pratos servidos pelo restaurante.</h3>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Valor</th>
+        <th>Tempo de preparo</th>
+        <th>Categoria</th>
+      </tr>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
-
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+      </thead>
+      <tbody>
+        <% @restaurant.dishes.order(:name).each do |res| %>
+          <tr>
+            <td><%= res.name %></td>
+            <td>R<%= number_to_currency res.price %></td>
+            <td><%= formatar_hora res.timePreparation %></td>
+            <td><%= res.category.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'Novo prato', new_dish_path, :class => 'btn btn-outline-success' %>
+  </div>
+</div>
