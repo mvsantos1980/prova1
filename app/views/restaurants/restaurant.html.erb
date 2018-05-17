@@ -11,6 +11,7 @@
     <div class="card-header bg-secondary" style="border-radius: 20px 0; margin-bottom: 10px">
       <h1 class="text-center text-white-50"><%= @selected_restaurant.name %> </h1>
     </div>
+    <nav class="nav navbar"><%= link_to "Home", root_path %></nav>
     <div class="row">
       <% @selected_restaurant.dishes.order(:name).each do |dish| %>
         <div class="col-4">
@@ -20,13 +21,13 @@
             </div>
             <div class="card-body">
               <p>Valor: <span class="font-weight-bold">R<%= number_to_currency dish.price %></span></p>
-              <p>Tempo de preparo: <%= dish.timePreparation %></p>
+              <p>Tempo de preparo: <%= formatar_hora dish.timePreparation %></p>
               <p>Categoria: <span class="font-weight-bold"><%= dish.category.description %></span></p>
               <div>
                 <small class="font-weight-bold">Ingredientes:</small>
-                <p>
+                <p><small class="text-black-50">| </small>
                   <% dish.ingredients.order(:description).each do |ing| %>
-                  <small><%= ing.description %>, </small>
+                  <small><%= ing.description %><span class="text-black-50"> | </span></small>
                   <% end %>
                 </p>
               </div>
@@ -39,7 +40,47 @@
     </div>
   </div>
 <!--  Barra lateral-->
-  <div class="col-3">barra</div>
+  <div class="col-3">
+    <p class="card-header">Busca por restaurante:
+      <span class="btn-sm btn-info help" title="Busca restaurantes pelo nome">
+            ?
+          </span>
+    </p>
+    <p>
+      <%= form_tag("/restaurants/home", method: "post", class: "form-inline") do %>
+      <div class="form-group mb-2">
+        <%= text_field_tag :search_term, '', maxlength: 15, size: 23, class: "form-control" %>
+        <%= submit_tag "Buscar", :class => 'btn btn-success' %>
+      </div>
+
+    <% end %>
+    </p>
+
+    <p class="card-header">Busca por prato:
+      <span class="btn-sm btn-info help" title="Busca restaurantes que contém o prato informado">
+                ?
+              </span>
+    </p>
+    <p>
+      <%= form_tag("/restaurants/home", method: "post", class: "form-inline") do %>
+      <div class="form-group mb-2">
+        <%= text_field_tag :search_term_dish, '', maxlength: 15, size: 23, class: "form-control" %>
+        <%= submit_tag "Buscar", :class => 'btn btn-success' %>
+      </div>
+
+    <% end %>
+    </p>
+    <p class="card-header">Categorias:
+      <span class="btn-sm btn-info help" title="Filtra restaurantes que contenham prato da categoria selecionada">
+            ?
+          </span>
+    </p>
+    <ul class="list-group lis">
+      <% Category.all.order(:description).each do |cat| %>
+        <li class="list-group-item btn-light"> <%= link_to cat.description, home_restaurants_path(category_id: cat.id) %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 

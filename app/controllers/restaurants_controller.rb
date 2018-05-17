@@ -25,13 +25,14 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all.order(:name)
     @restaurantsJoin = Restaurant.joins("INNER JOIN dishes ON dishes.restaurant_id = restaurants.id") unless params[:category_id].blank?
     @restaurants = @restaurantsJoin.where("category_id = :cat", {cat: params[:category_id]}) unless params[:category_id].blank?
-    # @restaurants = @restaurants.where(dish params[:category_id]) unless params[:category_id].blank?
+    @restaurants = Restaurant.where("UPPER(name) LIKE ?", "%#{params[:search_term].to_s.upcase}%") unless params[:search_term].blank?
+    @restaurantsJoin = Restaurant.joins("INNER JOIN dishes ON dishes.restaurant_id = restaurants.id") unless params[:search_term_dish].blank?
+    @restaurants = @restaurantsJoin.where("UPPER(dishes.name) LIKE ?", "%#{params[:search_term_dish].to_s.upcase}%") unless params[:search_term_dish].blank?
   end
 
   def restaurant
-    # @selected_restaurant = Restaurant.all.where(id: params[:restaurant_id]) unless params[:restaurant_id].blank?
+    @selected_restaurant = Restaurant.new unless params[:restaurant_id].present?
     @selected_restaurant = Restaurant.find params[:restaurant_id] unless params[:restaurant_id].blank?
-    # @selected_restaurant = Restaurant.joins ("INNER JOIN dishes ON dishes.restaurant_id = restaurants.id")
   end
 
   # POST /restaurants
